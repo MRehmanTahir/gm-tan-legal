@@ -989,10 +989,10 @@ h1, h2, h3 {
   overflow: hidden;
   border-radius: var(--radius);
   aspect-ratio: 3 / 3.7;
+  border: 1px solid rgba(138, 123, 107, 0.22);
   background:
-    radial-gradient(130% 80% at 50% 16%, rgba(196, 160, 82, 0.3), transparent 62%),
-    radial-gradient(100% 60% at 50% 100%, rgba(28, 4, 8, 0.55), transparent 70%),
-    linear-gradient(172deg, #7d1c2c 0%, #5a101d 52%, #3d0a12 100%);
+    radial-gradient(120% 80% at 50% 14%, rgba(255, 253, 247, 0.95) 0%, transparent 58%),
+    linear-gradient(180deg, #f7f1e4 0%, #eee3cc 58%, #e0d0ae 100%);
 }
 
 /* crest ring behind the figure */
@@ -1005,14 +1005,13 @@ h1, h2, h3 {
   aspect-ratio: 1;
   transform: translateX(-50%);
   border-radius: 50%;
-  border: 1px solid rgba(196, 160, 82, 0.38);
-  box-shadow: inset 0 0 0 6px rgba(196, 160, 82, 0.05);
+  border: 1px solid rgba(168, 124, 46, 0.3);
   transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1), border-color 0.6s ease;
 }
 
 .person:hover .person-photo::before {
   transform: translateX(-50%) scale(1.05);
-  border-color: rgba(233, 206, 138, 0.6);
+  border-color: rgba(168, 124, 46, 0.55);
 }
 
 .person-photo img {
@@ -1023,7 +1022,7 @@ h1, h2, h3 {
   object-fit: contain;
   object-position: center bottom;
   padding-top: 9%;
-  filter: saturate(0.96) contrast(1.02) drop-shadow(0 22px 34px rgba(20, 3, 7, 0.5));
+  filter: saturate(0.98) drop-shadow(0 20px 28px rgba(77, 52, 24, 0.22));
   transform-origin: bottom center;
   transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -1032,12 +1031,12 @@ h1, h2, h3 {
   transform: scale(1.045);
 }
 
-/* grounding vignette at the frame base */
+/* grounding wash at the frame base */
 .person-photo::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 78%, rgba(28, 4, 8, 0.45));
+  background: linear-gradient(180deg, transparent 80%, rgba(150, 116, 62, 0.16));
   pointer-events: none;
 }
 
