@@ -1,6 +1,7 @@
 import { animate, motion, useInView, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import Reveal from './Reveal'
+import { HairlineDraw, MaskedLine } from './fx'
 
 function Counter({ to, suffix = '' }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -40,28 +41,30 @@ export default function Philosophy() {
           <div>
             <Reveal>
               <span className="kicker">Our Philosophy</span>
-              <h2 className="display">
-                The counsel
-                <br />
-                you call <span className="accent">before</span>
-                <br />
-                the crisis arrives.
-              </h2>
             </Reveal>
-            <div className="stat-row">
+            <h2 className="display sm">
+              <MaskedLine delay={0.1}>The counsel you call</MaskedLine>
+              <MaskedLine delay={0.22}>
+                <span className="accent">before</span> the crisis arrives.
+              </MaskedLine>
+            </h2>
+            <div className="stat-block">
+              <HairlineDraw delay={0.3} />
+              <div className="stat-row">
               {STATS.map((s, i) => (
                 <motion.div
                   className="stat"
                   key={s.label}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.7, delay: 0.15 + i * 0.12, ease: 'easeOut' }}
+                  transition={{ duration: 0.7, delay: 0.2 + i * 0.12, ease: 'easeOut' }}
                 >
                   <Counter to={s.to} suffix={s.suffix} />
                   <div className="stat-label">{s.label}</div>
                 </motion.div>
               ))}
+              </div>
             </div>
           </div>
 
@@ -74,14 +77,10 @@ export default function Philosophy() {
             </Reveal>
             <Reveal delay={0.25}>
               <p>
-                GM Tan &amp; Company was built on a single conviction: that the most valuable legal
-                counsel anticipates, structures, and protects — rather than merely reacts.
-              </p>
-              <p>
-                Our clients are founders navigating complex ownership structures, families
-                preserving multi-generational wealth, and boards seeking governance that holds
-                under pressure. We stand beside them not only as legal advisors — but as trusted
-                strategic counsel.
+                The firm was built on one conviction: the best legal work happens before the
+                dispute, not after. Our clients are founders working through ownership and
+                growth, families preserving what they have built, and boards that need governance
+                to hold under pressure.
               </p>
             </Reveal>
           </div>

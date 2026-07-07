@@ -12,11 +12,20 @@ const LINKS = [
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [open, setOpen] = useState(false)
   const [hovered, setHovered] = useState<string | null>(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    let last = window.scrollY
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 40)
+      if (Math.abs(y - last) > 6) {
+        setHidden(y > last && y > 220)
+        last = y
+      }
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -33,9 +42,9 @@ export default function Nav() {
     <>
       <motion.header
         className="navwrap"
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
+        initial={{ y: -110, opacity: 0 }}
+        animate={{ y: hidden && !open ? -110 : 0, opacity: 1 }}
+        transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1] }}
       >
         <nav className={`navpill${scrolled ? ' scrolled' : ''}`} aria-label="Main navigation">
           <a href="#top" className="nav-logo" aria-label="GM Tan & Company — Home">

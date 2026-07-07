@@ -1,5 +1,7 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRightIcon } from './icons'
+import { MaskedLine, Magnetic, EASE } from './fx'
 
 const TICKER = [
   'Corporate Commercial',
@@ -15,112 +17,93 @@ const TICKER = [
   'M&A Support',
 ]
 
-const LINES: Array<{ text: string; accent?: boolean }> = [
-  { text: 'Protecting' },
-  { text: 'Businesses,' },
-  { text: 'Founders &' },
-  { text: 'Families.', accent: true },
-]
-
-function MaskedLine({
-  children,
-  delay,
-}: {
-  children: React.ReactNode
-  delay: number
-}) {
-  const reduce = useReducedMotion()
-  return (
-    <span className="line-mask">
-      <motion.span
-        style={{ display: 'block' }}
-        initial={{ y: reduce ? 0 : '110%' }}
-        animate={{ y: 0 }}
-        transition={{ duration: 1.05, delay, ease: [0.22, 0.61, 0.36, 1] }}
-      >
-        {children}
-      </motion.span>
-    </span>
-  )
-}
-
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null)
+  const reduce = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '14%'])
+  const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0])
+
   return (
-    <section className="hero" id="top">
+    <section className="hero" id="top" ref={ref}>
       <motion.div
         className="hero-bg"
         aria-hidden="true"
-        initial={{ scale: 1.12 }}
+        initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 9, ease: 'easeOut' }}
+        style={reduce ? undefined : { y: bgY }}
       />
       <div className="hero-veil" aria-hidden="true" />
 
-      <div className="container hero-inner">
-        <div>
-          <motion.p
-            className="hero-kicker"
-            initial={{ opacity: 0, x: -24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: 'easeOut' }}
-          >
-            Advocates &amp; Solicitors · Petaling Jaya, Selangor
-          </motion.p>
-
-          <h1 className="hero-title">
-            {LINES.map((line, i) => (
-              <MaskedLine key={line.text} delay={0.3 + i * 0.13}>
-                {line.accent ? <span className="accent">{line.text}</span> : line.text}
-              </MaskedLine>
-            ))}
-          </h1>
-
-          <motion.p
-            className="hero-lede"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.0, ease: 'easeOut' }}
-          >
-            For over two decades, GM Tan &amp; Company has stood beside founders, directors, and
-            families — as the counsel that anticipates risk, architects protection, and guides
-            every generation through what comes next.
-          </motion.p>
-
-          <motion.div
-            className="hero-ctas"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.15, ease: 'easeOut' }}
-          >
-            <a href="#engage" className="btn btn-gold">
-              Begin a Conversation
-              <span className="btn-arrow">
-                <ArrowRightIcon />
-              </span>
-            </a>
-            <a href="#practice" className="btn btn-ghost">
-              Our Practice Areas
-            </a>
-          </motion.div>
-        </div>
-
-        <motion.aside
-          className="hero-side"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.25, ease: 'easeOut' }}
+      <motion.div className="container hero-inner" style={reduce ? undefined : { opacity: fade }}>
+        <motion.p
+          className="hero-kicker"
+          initial={{ opacity: 0, x: -24 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, delay: 0.15, ease: 'easeOut' }}
         >
-          <p className="hero-firm">Messrs. GM Tan &amp; Company</p>
+          Advocates &amp; Solicitors · Petaling Jaya, Selangor
+        </motion.p>
+
+        <h1 className="hero-title">
+          <MaskedLine mount delay={0.3}>
+            Protecting Businesses,
+          </MaskedLine>
+          <MaskedLine mount delay={0.45}>
+            Founders &amp; <span className="accent">Families.</span>
+          </MaskedLine>
+        </h1>
+
+        <div className="hero-foot">
           <div>
-            <div className="hero-years-num gold-gradient">20+</div>
-            <div className="hero-years-label">
-              Years in
-              <br />
-              Practice
-            </div>
+            <motion.p
+              className="hero-lede"
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.9, ease: EASE }}
+            >
+              Counsel to Malaysian companies, and to the families behind them, for more than
+              twenty years.
+            </motion.p>
+            <motion.div
+              className="hero-ctas"
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 1.05, ease: EASE }}
+            >
+              <Magnetic>
+                <a href="#engage" className="btn btn-gold">
+                  Begin a Conversation
+                  <span className="btn-arrow">
+                    <ArrowRightIcon />
+                  </span>
+                </a>
+              </Magnetic>
+              <a href="#practice" className="btn btn-ghost">
+                Practice Areas
+              </a>
+            </motion.div>
           </div>
-        </motion.aside>
-      </div>
+
+          <motion.aside
+            className="hero-side"
+            initial={{ opacity: 0, y: 26 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.2, ease: EASE }}
+          >
+            <p className="hero-firm">Messrs. GM Tan &amp; Company</p>
+            <div>
+              <div className="hero-years-num gold-gradient">20+</div>
+              <div className="hero-years-label">
+                Years in
+                <br />
+                Practice
+              </div>
+            </div>
+          </motion.aside>
+        </div>
+      </motion.div>
 
       <motion.div
         className="ticker"

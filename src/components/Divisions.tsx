@@ -1,32 +1,33 @@
 import Reveal from './Reveal'
+import { MaskedLine } from './fx'
 
 const DIVISIONS = [
   {
     letter: 'A',
     label: 'Division A',
     name: 'GM Tan Legal',
-    desc: 'Our foundation — rigorous, relationship-driven legal work across corporate, commercial, employment, trademarks, and dispute resolution. The engine that has served Malaysian businesses for over two decades.',
+    desc: 'The foundation: corporate, commercial, employment and dispute work for Malaysian businesses, for over twenty years.',
     tags: ['Corporate', 'Commercial', 'Employment', 'IP & Trademarks'],
   },
   {
     letter: 'B',
     label: 'Division B',
     name: 'GM Tan Advisory',
-    desc: 'Monthly retainer advisory for founders and business owners. Ongoing strategy, governance, contract reviews, and risk management — the counsel that keeps you out of trouble before it starts.',
+    desc: 'Retainer counsel for founders and owners. Strategy, contract reviews and risk, month to month.',
     tags: ['Founder Advisory', 'Business Strategy', 'Governance', 'Risk Reviews'],
   },
   {
     letter: 'C',
     label: 'Division C',
     name: 'GM Tan Boardroom',
-    desc: 'Premium advisory for CEOs, directors, investors, and family businesses. Board governance, succession, trust structures, and crisis management — at the level that significant decisions demand.',
+    desc: 'Board-level counsel for directors, investors and family businesses: governance, succession, crisis.',
     tags: ['Director Duties', 'Succession', 'Family Wealth', 'Crisis Management'],
   },
   {
     letter: 'D',
     label: 'Division D',
     name: 'GM Tan Academy',
-    desc: 'Educational programmes and workshops for directors, founders, and business owners. Every session builds capability, deepens relationships, and creates the trust that turns participants into long-term clients.',
+    desc: 'Workshops for directors, founders and owners, taught by the lawyers who do the work.',
     tags: ['Director Workshops', 'ESG Training', 'Family Business', 'Mediation Skills'],
   },
 ]
@@ -38,12 +39,13 @@ export default function Divisions() {
         <div className="divisions-head">
           <Reveal>
             <span className="kicker">How We Are Structured</span>
-            <h2 className="display">
-              Four divisions.
-              <br />
-              One <span className="accent">trusted institution.</span>
-            </h2>
           </Reveal>
+          <h2 className="display">
+            <MaskedLine delay={0.1}>Four divisions.</MaskedLine>
+            <MaskedLine delay={0.22}>
+              One <span className="accent">firm.</span>
+            </MaskedLine>
+          </h2>
         </div>
 
         <div className="div-grid">

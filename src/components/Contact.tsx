@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import Reveal from './Reveal'
 import { ArrowRightIcon } from './icons'
+import { HairlineDraw, MaskedLine } from './fx'
 
 /**
  * Lead destination. FormSubmit relays submissions to this inbox with no backend;
@@ -56,19 +57,23 @@ export default function Contact() {
           <div className="engage-left">
             <Reveal>
               <span className="kicker">Engage Us</span>
-              <h2 className="display">
-                The right time
-                <br />
-                to call us <span className="accent">is now.</span>
-              </h2>
-              <p className="lede">
-                The most expensive legal advice is the advice you did not seek before the problem
-                arrived. We welcome a confidential first conversation — without obligation.
+            </Reveal>
+            <h2 className="display sm">
+              <MaskedLine delay={0.1}>The right time to</MaskedLine>
+              <MaskedLine delay={0.22}>
+                call us <span className="accent">is now.</span>
+              </MaskedLine>
+            </h2>
+            <Reveal delay={0.25}>
+              <p className="lede" style={{ marginTop: 28 }}>
+                The most expensive advice is the advice you never sought. A first conversation is
+                confidential and costs nothing.
               </p>
             </Reveal>
 
             <Reveal delay={0.15}>
               <div className="contact-list">
+                <HairlineDraw />
                 <div className="contact-item">
                   <strong>Address</strong>
                   <span>
@@ -150,8 +155,8 @@ export default function Contact() {
               </button>
 
               <p className="eform-note">
-                All enquiries are treated in strict confidence. Submitting this form does not
-                create a solicitor–client relationship.
+                Enquiries are treated in confidence. Submitting this form does not create a
+                solicitor–client relationship.
               </p>
 
               {status === 'ok' && (

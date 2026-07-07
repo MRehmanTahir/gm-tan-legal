@@ -1,9 +1,10 @@
 # GM Tan & Company — Firm Website
 
-Marketing website for **GM Tan & Company**, an established Malaysian law firm
-("Heart Based Lawyers" — Peguambela & Peguamcara).
+Marketing website for **Messrs. GM Tan & Company**, Advocates & Solicitors,
+Petaling Jaya ("HeartBased Lawyers").
 
-Built with **Vite + React + TypeScript** and **Framer Motion** for animation.
+Built with **Vite + React + TypeScript**, **Framer Motion** for animation and
+**Lenis** for inertia smooth-scrolling.
 
 ## Run locally
 
@@ -30,16 +31,19 @@ and **Lato** (body, nav, forms) via Google Fonts.
 
 ## Sections
 
-Sticky topbar + nav · Hero (animated stats) · Practice Areas (6 icon cards) ·
-The Advocate (Ms. GM Tan) · Why GM Tan & Co · Testimonials + trust marquee ·
-Contact (enquiry form, address, map, hours) · Footer.
+Floating pill nav · Hero (masked line reveal, services ticker) · Philosophy
+(counters) · Practice Areas (accordion, 6 domains) · Divisions (A–D) ·
+Our People (3 partners) · Approach (I–IV) · Testimonial · Engage Us
+(confidential enquiry form + contact details) · Footer.
 
 ## Content to finalise before launch
 
 - **Lead form**: submissions POST to [FormSubmit](https://formsubmit.co) —
-  change `LEAD_ENDPOINT` in `src/components/Contact.tsx` to the firm's inbox.
-  The first submission triggers a one-time activation email to that address.
-- **Photography**: current images are Unsplash placeholders (including the
-  portrait standing in for Ms. Tan) — replace with the firm's own photos.
-- **Firm details**: address, phone, email, established year, and testimonial
-  attributions are placeholders pending the firm's real details.
+  change `LEAD_ENDPOINT` in `src/components/Contact.tsx` to the firm's inbox
+  (e.g. `azlenamaria@gmtan.biz`). The first submission triggers a one-time
+  activation email to that address.
+- **Photography**: partner portraits are Unsplash placeholders — replace with
+  the firm's own photos.
+- **Social/OG**: `public/og.png` uses a system serif; regenerate with brand
+  fonts if desired, and set absolute `og:image`/canonical URLs in
+  `index.html` once the production domain is confirmed.

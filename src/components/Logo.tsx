@@ -1,7 +1,3 @@
-interface LogoProps {
-  compact?: boolean
-}
-
 /**
  * Brand mark: scales of justice within a laurel crest, gold on maroon —
  * a simplified SVG rendition of the firm's supplied logo.
@@ -41,18 +37,5 @@ export function LogoMark({ size = 46 }: { size?: number }) {
         <circle cx="38" cy="46" r="1" />
       </g>
     </svg>
-  )
-}
-
-export default function Logo({ compact = false }: LogoProps) {
-  return (
-    <a href="#home" className="logo" aria-label="GM Tan & Company — Home">
-      <LogoMark size={compact ? 40 : 46} />
-      <span>
-        <span className="logo-name">GM TAN &amp; COMPANY</span>
-        <br />
-        <span className="logo-tag">Heart Based Lawyers</span>
-      </span>
-    </a>
   )
 }

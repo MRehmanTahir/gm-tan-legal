@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Reveal from './Reveal'
 import { ArrowRightIcon, PlusIcon } from './icons'
+import { MaskedLine } from './fx'
 
 const AREAS = [
   {
     num: '01',
     title: 'Corporate & Commercial',
-    desc: 'The legal architecture your business depends on — structured with care, enforced with precision.',
+    desc: 'The agreements and structures a business runs on, drafted to hold when tested.',
     services: [
       'Shareholders & Joint Venture Agreements',
       'M&A Support & Corporate Restructuring',
@@ -19,7 +20,7 @@ const AREAS = [
   {
     num: '02',
     title: 'Employment & Workplace',
-    desc: 'Protecting employers and employees alike — with preventive counsel that keeps disputes from reaching the tribunal.',
+    desc: 'Contracts, policies and disputes, handled before they harden into tribunal matters.',
     services: [
       'Employment Contracts & Policies',
       'Disciplinary Processes & IR Matters',
@@ -31,7 +32,7 @@ const AREAS = [
   {
     num: '03',
     title: 'Family Wealth & Succession',
-    desc: 'For first-generation entrepreneurs entering legacy mode — and families protecting what took a lifetime to build.',
+    desc: 'For families and founders deciding how what they built should pass on.',
     services: [
       'Trust Structures & Holding Structures',
       'Succession Planning & Family Constitutions',
@@ -43,7 +44,7 @@ const AREAS = [
   {
     num: '04',
     title: 'ESG & Governance',
-    desc: 'Embedding responsible governance at every level — for businesses that are built to last and lead.',
+    desc: 'Governance, compliance and reporting for boards that take their duties seriously.',
     services: [
       'ESG Policy & Compliance Frameworks',
       'Board Governance Advisory',
@@ -55,7 +56,7 @@ const AREAS = [
   {
     num: '05',
     title: 'Mediation & Dispute Resolution',
-    desc: 'Preserving relationships and resolving conflict — with expertise that keeps disputes out of the courtroom wherever possible.',
+    desc: 'Settling conflict without burning the relationships around it.',
     services: [
       'Commercial Mediation',
       'Family & Partnership Disputes',
@@ -67,7 +68,7 @@ const AREAS = [
   {
     num: '06',
     title: 'Trademarks & IP',
-    desc: 'Your brand and intellectual assets are among your most valuable properties. We protect them rigorously.',
+    desc: 'Registration and defence of the brands and ideas your business trades on.',
     services: [
       'Trademark Registration & Renewals',
       'IP Strategy & Portfolio Management',
@@ -85,14 +86,17 @@ export default function PracticeAreas() {
     <section className="practice section" id="practice">
       <div className="container">
         <div className="practice-head">
-          <Reveal>
-            <span className="kicker">Practice Areas</span>
+          <div>
+            <Reveal>
+              <span className="kicker">Practice Areas</span>
+            </Reveal>
             <h2 className="display">
-              Precision counsel across
-              <br />
-              every <span className="accent">critical domain.</span>
+              <MaskedLine delay={0.1}>What we do,</MaskedLine>
+              <MaskedLine delay={0.22}>
+                and do <span className="accent">well.</span>
+              </MaskedLine>
             </h2>
-          </Reveal>
+          </div>
         </div>
 
         <div>

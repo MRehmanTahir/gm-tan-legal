@@ -1,4 +1,5 @@
 import Reveal from './Reveal'
+import { MaskedLine, ParallaxPhoto } from './fx'
 
 const PEOPLE = [
   {
@@ -44,19 +45,21 @@ export default function People() {
     <section className="people section" id="people">
       <div className="container">
         <div className="people-head">
-          <Reveal>
-            <span className="kicker">Our People</span>
+          <div>
+            <Reveal>
+              <span className="kicker">Our People</span>
+            </Reveal>
             <h2 className="display">
-              Advisors who lead with
-              <br />
-              <span className="accent">heart</span> and depth.
+              <MaskedLine delay={0.1}>Advisors with</MaskedLine>
+              <MaskedLine delay={0.22}>
+                <span className="accent">heart</span> and depth.
+              </MaskedLine>
             </h2>
-          </Reveal>
-          <Reveal delay={0.15}>
+          </div>
+          <Reveal delay={0.2}>
             <p className="lede">
-              Our partners bring decades of legal practice, commercial experience, and advisory
-              expertise together. We do not just send you a letter of advice — we stand in the
-              room with you.
+              Our partners do not send a letter of advice and step back. They stand in the room
+              with you.
             </p>
           </Reveal>
         </div>
@@ -64,10 +67,8 @@ export default function People() {
         <div className="people-grid">
           {PEOPLE.map((p, i) => (
             <Reveal key={p.name} delay={i * 0.14} className="person">
-              <div className="person-photo">
-                {/* Placeholder portraits — replace with the firm's photography */}
-                <img src={p.photo} alt={`${p.name}, ${p.role}`} loading="lazy" />
-              </div>
+              {/* Placeholder portraits — replace with the firm's photography */}
+              <ParallaxPhoto src={p.photo} alt={`${p.name}, ${p.role}`} />
               <h3 className="person-name">{p.name}</h3>
               <div className="person-role">{p.role}</div>
               <ul className="person-creds">
