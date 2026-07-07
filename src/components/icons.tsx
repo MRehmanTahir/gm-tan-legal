@@ -117,6 +117,12 @@ export const ArrowRightIcon = ({ size = 14 }: IconProps) => (
   </svg>
 )
 
+export const PlusIcon = ({ size = 18 }: IconProps) => (
+  <svg {...base(size)}>
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+)
+
 export const MenuIcon = ({ size = 20 }: IconProps) => (
   <svg {...base(size)}>
     <path d="M4 7h16M4 12h16M4 17h16" />

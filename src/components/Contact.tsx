@@ -1,23 +1,25 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import Reveal from './Reveal'
-import { ClockIcon, MailIcon, PhoneIcon, PinIcon } from './icons'
+import { ArrowRightIcon } from './icons'
 
 /**
  * Lead destination. FormSubmit relays submissions to this inbox with no backend;
  * the first submission triggers a one-time activation email to the address below.
- * Swap for the firm's production inbox (or your own endpoint) before launch.
+ * Swap for the firm's production inbox (e.g. azlenamaria@gmtan.biz) before launch.
  */
 const LEAD_ENDPOINT = 'https://formsubmit.co/ajax/accounts@k5.com.au'
 
-const MATTER_TYPES = [
-  'Civil / Commercial Litigation',
+const ENQUIRY_AREAS = [
   'Corporate & Commercial',
-  'Conveyancing & Real Property',
-  'Family & Matrimonial',
-  'Wills, Probate & Estate',
-  'Employment & Industrial Relations',
-  'Other / General Enquiry',
+  'Employment & Workplace',
+  'Family Wealth & Succession',
+  'ESG & Governance',
+  'Mediation & Dispute Resolution',
+  'Trademarks & IP',
+  'Business Advisory Retainer',
+  'Board & Governance Advisory',
+  'Other',
 ]
 
 type Status = 'idle' | 'sending' | 'ok' | 'err'
@@ -35,7 +37,7 @@ export default function Contact() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          _subject: `New consultation enquiry — ${data.matter}`,
+          _subject: `Confidential enquiry — ${data.area}`,
           ...data,
         }),
       })
@@ -48,140 +50,123 @@ export default function Contact() {
   }
 
   return (
-    <section className="contact section-pad" id="contact">
+    <section className="engage section" id="engage">
       <div className="container">
-        <Reveal>
-          <span className="kicker">Hubungi Kami · Get in Touch</span>
-          <h2 className="section-title">Book a Consultation</h2>
-          <p className="section-lede">
-            Tell us briefly about your matter. All enquiries are treated in strict confidence, and
-            we will respond within one working day.
-          </p>
-        </Reveal>
+        <div className="engage-grid">
+          <div className="engage-left">
+            <Reveal>
+              <span className="kicker">Engage Us</span>
+              <h2 className="display">
+                The right time
+                <br />
+                to call us <span className="accent">is now.</span>
+              </h2>
+              <p className="lede">
+                The most expensive legal advice is the advice you did not seek before the problem
+                arrived. We welcome a confidential first conversation — without obligation.
+              </p>
+            </Reveal>
 
-        <div className="contact-grid">
-          <Reveal delay={0.1}>
-            <form className="contact-form-card" onSubmit={onSubmit} noValidate={false}>
-              <div className="form-row">
-                <div className="form-field">
-                  <label htmlFor="cf-name">Full Name</label>
-                  <input id="cf-name" name="name" type="text" required placeholder="Your name" />
+            <Reveal delay={0.15}>
+              <div className="contact-list">
+                <div className="contact-item">
+                  <strong>Address</strong>
+                  <span>
+                    C-10-28, Block C, Lobby 2<br />
+                    Centum Oasis Corporate Park
+                    <br />
+                    No. 2, Jalan PJU 1A/2, Ara Damansara
+                    <br />
+                    47301 Petaling Jaya, Selangor
+                  </span>
                 </div>
-                <div className="form-field">
-                  <label htmlFor="cf-email">Email</label>
-                  <input
-                    id="cf-email"
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="you@example.com"
-                  />
+                <div className="contact-item">
+                  <strong>Telephone</strong>
+                  <a href="tel:+60327145456">03-2714 5456</a>
+                </div>
+                <div className="contact-item">
+                  <strong>Mobile</strong>
+                  <a href="tel:+60162727144">016-272 7144</a>
+                </div>
+                <div className="contact-item">
+                  <strong>Email</strong>
+                  <a href="mailto:azlenamaria@gmtan.biz">azlenamaria@gmtan.biz</a>
                 </div>
               </div>
-              <div className="form-row">
-                <div className="form-field">
-                  <label htmlFor="cf-phone">Phone</label>
-                  <input
-                    id="cf-phone"
-                    name="phone"
-                    type="tel"
-                    required
-                    placeholder="+60 12-345 6789"
-                  />
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.2}>
+            <form className="eform" onSubmit={onSubmit} aria-label="Confidential enquiry form">
+              <div className="eform-row">
+                <div className="efield">
+                  <label htmlFor="ef-first">First Name</label>
+                  <input id="ef-first" name="first_name" type="text" required />
+                  <span className="efield-bar" />
                 </div>
-                <div className="form-field">
-                  <label htmlFor="cf-matter">Matter Type</label>
-                  <select id="cf-matter" name="matter" required defaultValue="">
+                <div className="efield">
+                  <label htmlFor="ef-last">Last Name</label>
+                  <input id="ef-last" name="last_name" type="text" required />
+                  <span className="efield-bar" />
+                </div>
+              </div>
+              <div className="efield">
+                <label htmlFor="ef-company">Company / Organisation</label>
+                <input id="ef-company" name="company" type="text" />
+                <span className="efield-bar" />
+              </div>
+              <div className="eform-row">
+                <div className="efield">
+                  <label htmlFor="ef-email">Email Address</label>
+                  <input id="ef-email" name="email" type="email" required />
+                  <span className="efield-bar" />
+                </div>
+                <div className="efield">
+                  <label htmlFor="ef-area">Area of Enquiry</label>
+                  <select id="ef-area" name="area" required defaultValue="">
                     <option value="" disabled>
-                      Select a matter type
+                      Select a practice area
                     </option>
-                    {MATTER_TYPES.map((m) => (
-                      <option key={m} value={m}>
-                        {m}
+                    {ENQUIRY_AREAS.map((a) => (
+                      <option key={a} value={a}>
+                        {a}
                       </option>
                     ))}
                   </select>
+                  <span className="efield-bar" />
                 </div>
               </div>
-              <div className="form-field">
-                <label htmlFor="cf-message">Message</label>
-                <textarea
-                  id="cf-message"
-                  name="message"
-                  required
-                  placeholder="Briefly describe your matter. Please avoid sharing highly sensitive details until we speak."
-                />
+              <div className="efield">
+                <label htmlFor="ef-message">Brief Description</label>
+                <textarea id="ef-message" name="message" required />
+                <span className="efield-bar" />
               </div>
+
               <button type="submit" className="btn btn-gold" disabled={status === 'sending'}>
-                {status === 'sending' ? 'Sending…' : 'Request Consultation'}
+                {status === 'sending' ? 'Sending…' : 'Submit Confidential Enquiry'}
+                <span className="btn-arrow">
+                  <ArrowRightIcon />
+                </span>
               </button>
-              <p className="form-note">
-                Submitting this form does not create a solicitor–client relationship. Maklumat anda
-                dirahsiakan — your information is kept confidential.
+
+              <p className="eform-note">
+                All enquiries are treated in strict confidence. Submitting this form does not
+                create a solicitor–client relationship.
               </p>
+
               {status === 'ok' && (
-                <p className="form-status ok" role="status">
-                  Thank you — your enquiry has been received. We will be in touch within one working
-                  day.
+                <p className="eform-status ok" role="status">
+                  Thank you — your enquiry has been received in confidence. We will be in touch
+                  shortly.
                 </p>
               )}
               {status === 'err' && (
-                <p className="form-status err" role="alert">
-                  We could not send your enquiry just now. Kindly telephone us at +60 3-2141 8800 or
-                  email enquiries@gmtan.com.my.
+                <p className="eform-status err" role="alert">
+                  We could not send your enquiry just now. Kindly telephone us at 03-2714 5456 or
+                  email azlenamaria@gmtan.biz.
                 </p>
               )}
             </form>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <aside className="contact-info-card">
-              <h3>The Chambers</h3>
-              <div className="contact-line">
-                <PinIcon size={18} />
-                <div>
-                  <strong>Address · Alamat</strong>
-                  Suite 18-03, Menara Centara,
-                  <br />
-                  360 Jalan Tuanku Abdul Rahman,
-                  <br />
-                  50100 Kuala Lumpur, Malaysia
-                </div>
-              </div>
-              <div className="contact-line">
-                <PhoneIcon size={18} />
-                <div>
-                  <strong>Telephone</strong>
-                  <a href="tel:+60321418800">+60 3-2141 8800</a>
-                </div>
-              </div>
-              <div className="contact-line">
-                <MailIcon size={18} />
-                <div>
-                  <strong>Email</strong>
-                  <a href="mailto:enquiries@gmtan.com.my">enquiries@gmtan.com.my</a>
-                </div>
-              </div>
-              <div className="contact-line">
-                <ClockIcon size={18} />
-                <div>
-                  <strong>Office Hours · Waktu Pejabat</strong>
-                  Monday – Friday: 9.00 am – 6.00 pm
-                  <br />
-                  Saturday: By appointment
-                  <br />
-                  Sunday &amp; Public Holidays: Closed
-                </div>
-              </div>
-              <div className="contact-map">
-                <iframe
-                  title="GM Tan & Company office location, Kuala Lumpur"
-                  src="https://www.google.com/maps?q=Menara+Centara,+360+Jalan+Tuanku+Abdul+Rahman,+Kuala+Lumpur&output=embed"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-            </aside>
           </Reveal>
         </div>
       </div>

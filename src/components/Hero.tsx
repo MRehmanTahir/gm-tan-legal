@@ -1,105 +1,142 @@
-import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { animate } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { ArrowRightIcon } from './icons'
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
-}
+const TICKER = [
+  'Corporate Commercial',
+  'Business Advisory',
+  'Family Governance',
+  'Succession Planning',
+  'Employment Law',
+  'ESG Advisory',
+  'Mediation',
+  'Trademark Registration',
+  'Board Governance',
+  'Trust Structures',
+  'M&A Support',
+]
 
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 0.61, 0.36, 1] } },
-}
+const LINES: Array<{ text: string; accent?: boolean }> = [
+  { text: 'Protecting' },
+  { text: 'Businesses,' },
+  { text: 'Founders &' },
+  { text: 'Families.', accent: true },
+]
 
-function Counter({ to, suffix = '' }: { to: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
+function MaskedLine({
+  children,
+  delay,
+}: {
+  children: React.ReactNode
+  delay: number
+}) {
   const reduce = useReducedMotion()
-  const [value, setValue] = useState(reduce ? to : 0)
-
-  useEffect(() => {
-    if (!inView || reduce) return
-    const controls = animate(0, to, {
-      duration: 1.8,
-      ease: 'easeOut',
-      onUpdate: (v) => setValue(Math.round(v)),
-    })
-    return () => controls.stop()
-  }, [inView, to, reduce])
-
   return (
-    <span ref={ref} className="gold-gradient hero-stat-num">
-      {value.toLocaleString()}
-      {suffix}
+    <span className="line-mask">
+      <motion.span
+        style={{ display: 'block' }}
+        initial={{ y: reduce ? 0 : '110%' }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1.05, delay, ease: [0.22, 0.61, 0.36, 1] }}
+      >
+        {children}
+      </motion.span>
     </span>
   )
 }
 
 export default function Hero() {
   return (
-    <section className="hero" id="home">
-      <div className="hero-bg" aria-hidden="true" />
-      <div className="hero-vignette" aria-hidden="true" />
-      <div className="container">
-        <motion.div variants={container} initial="hidden" animate="show">
-          <motion.p className="hero-est" variants={item}>
-            Established Malaysian Practice
+    <section className="hero" id="top">
+      <motion.div
+        className="hero-bg"
+        aria-hidden="true"
+        initial={{ scale: 1.12 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 9, ease: 'easeOut' }}
+      />
+      <div className="hero-veil" aria-hidden="true" />
+
+      <div className="container hero-inner">
+        <div>
+          <motion.p
+            className="hero-kicker"
+            initial={{ opacity: 0, x: -24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: 'easeOut' }}
+          >
+            Advocates &amp; Solicitors · Petaling Jaya, Selangor
           </motion.p>
-          <motion.h1 variants={item}>
-            <span className="gold-gradient">GM Tan &amp; Company</span>
-          </motion.h1>
-          <motion.p className="hero-sub" variants={item}>
-            Heart Based Lawyers — Peguambela &amp; Peguamcara
+
+          <h1 className="hero-title">
+            {LINES.map((line, i) => (
+              <MaskedLine key={line.text} delay={0.3 + i * 0.13}>
+                {line.accent ? <span className="accent">{line.text}</span> : line.text}
+              </MaskedLine>
+            ))}
+          </h1>
+
+          <motion.p
+            className="hero-lede"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 1.0, ease: 'easeOut' }}
+          >
+            For over two decades, GM Tan &amp; Company has stood beside founders, directors, and
+            families — as the counsel that anticipates risk, architects protection, and guides
+            every generation through what comes next.
           </motion.p>
-          <motion.p className="hero-lede" variants={item}>
-            Steadfast counsel for litigation, corporate and personal legal matters. For decades we
-            have protected the interests of Malaysian families and businesses with discretion,
-            diligence and heart.
-          </motion.p>
-          <motion.div className="hero-ctas" variants={item}>
-            <a href="#contact" className="btn btn-gold">
-              Book a Consultation
+
+          <motion.div
+            className="hero-ctas"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 1.15, ease: 'easeOut' }}
+          >
+            <a href="#engage" className="btn btn-gold">
+              Begin a Conversation
+              <span className="btn-arrow">
+                <ArrowRightIcon />
+              </span>
             </a>
-            <a href="#practice" className="btn btn-outline">
+            <a href="#practice" className="btn btn-ghost">
               Our Practice Areas
             </a>
           </motion.div>
-          <motion.div className="hero-stats" variants={item}>
-            <div className="hero-stat">
-              <Counter to={25} suffix="+" />
-              <div className="hero-stat-label">Years in Practice</div>
-            </div>
-            <div className="hero-stat">
-              <Counter to={1200} suffix="+" />
-              <div className="hero-stat-label">Matters Handled</div>
-            </div>
-            <div className="hero-stat">
-              <Counter to={6} />
-              <div className="hero-stat-label">Practice Areas</div>
-            </div>
-          </motion.div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="hero-figure"
-          initial={{ opacity: 0, scale: 0.96, y: 24 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
+        <motion.aside
+          className="hero-side"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.25, ease: 'easeOut' }}
         >
-          <div className="hero-figure-frame">
-            <img
-              src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=900&q=75"
-              alt="Scales of justice and gavel in a law chamber"
-              loading="eager"
-            />
-            <div className="hero-figure-caption">
-              <strong>Counsel you can confide in.</strong>
-              <span>Discretion · Diligence · Results</span>
+          <p className="hero-firm">Messrs. GM Tan &amp; Company</p>
+          <div>
+            <div className="hero-years-num gold-gradient">20+</div>
+            <div className="hero-years-label">
+              Years in
+              <br />
+              Practice
             </div>
           </div>
-        </motion.div>
+        </motion.aside>
       </div>
+
+      <motion.div
+        className="ticker"
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, delay: 1.5 }}
+      >
+        <div className="ticker-track">
+          {[...TICKER, ...TICKER].map((item, i) => (
+            <span className="ticker-item" key={i}>
+              {item}
+            </span>
+          ))}
+        </div>
+      </motion.div>
     </section>
   )
 }

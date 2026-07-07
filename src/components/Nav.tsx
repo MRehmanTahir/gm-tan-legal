@@ -1,55 +1,69 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import Logo from './Logo'
-import { CloseIcon, MailIcon, MenuIcon, PhoneIcon } from './icons'
+import { LogoMark } from './Logo'
+import { CloseIcon, MenuIcon } from './icons'
 
 const LINKS = [
   { href: '#practice', label: 'Practice Areas' },
-  { href: '#advocate', label: 'The Advocate' },
-  { href: '#why', label: 'Why Us' },
-  { href: '#testimonials', label: 'Testimonials' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#divisions', label: 'Divisions' },
+  { href: '#people', label: 'Our People' },
+  { href: '#approach', label: 'Our Approach' },
 ]
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [hovered, setHovered] = useState<string | null>(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
+    const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
   return (
     <>
-      <div className="topbar">
-        <div className="container">
-          <div className="topbar-items">
-            <span className="topbar-item">
-              <PhoneIcon size={14} /> +60 3-2141 8800
+      <motion.header
+        className="navwrap"
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
+      >
+        <nav className={`navpill${scrolled ? ' scrolled' : ''}`} aria-label="Main navigation">
+          <a href="#top" className="nav-logo" aria-label="GM Tan & Company — Home">
+            <LogoMark size={38} />
+            <span>
+              <span className="nav-logo-name">GM TAN &amp; COMPANY</span>
+              <span className="nav-logo-tag">HeartBased Lawyers</span>
             </span>
-            <span className="topbar-item">
-              <MailIcon size={14} /> enquiries@gmtan.com.my
-            </span>
-          </div>
-          <span className="topbar-bm">Peguambela &amp; Peguamcara · Advocates &amp; Solicitors</span>
-        </div>
-      </div>
-
-      <nav className={`nav${scrolled ? ' scrolled' : ''}`} aria-label="Main navigation">
-        <div className="container">
-          <Logo compact />
-          <ul className="nav-links">
+          </a>
+          <ul className="nav-links" onMouseLeave={() => setHovered(null)}>
             {LINKS.map((l) => (
-              <li key={l.href}>
-                <a href={l.href}>{l.label}</a>
+              <li key={l.href} style={{ position: 'relative' }}>
+                <a href={l.href} onMouseEnter={() => setHovered(l.href)}>
+                  {hovered === l.href && (
+                    <motion.span
+                      className="nav-hover-bg"
+                      layoutId="nav-hover"
+                      transition={{ type: 'spring', bounce: 0.18, duration: 0.5 }}
+                    />
+                  )}
+                  {l.label}
+                  <span className="nav-dot" />
+                </a>
               </li>
             ))}
           </ul>
-          <a href="#contact" className="btn btn-gold nav-cta">
-            Book a Consultation
+          <a href="#engage" className="btn btn-gold nav-cta">
+            Engage Us
           </a>
           <button
             className="nav-burger"
@@ -59,34 +73,40 @@ export default function Nav() {
           >
             {open ? <CloseIcon /> : <MenuIcon />}
           </button>
-        </div>
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              className="nav-mobile"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-            >
-              <ul>
-                {LINKS.map((l) => (
-                  <li key={l.href}>
-                    <a href={l.href} onClick={() => setOpen(false)}>
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-                <li>
-                  <a href="#contact" onClick={() => setOpen(false)} style={{ color: '#E9CE8A' }}>
-                    Book a Consultation →
+        </nav>
+      </motion.header>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="menu-overlay"
+            initial={{ opacity: 0, y: '-4%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '-4%' }}
+            transition={{ duration: 0.45, ease: [0.22, 0.61, 0.36, 1] }}
+          >
+            <ul>
+              {[...LINKS, { href: '#engage', label: 'Engage Us' }].map((l, i) => (
+                <motion.li
+                  key={l.href}
+                  initial={{ opacity: 0, x: -28 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.15 + i * 0.07, duration: 0.5, ease: 'easeOut' }}
+                >
+                  <a href={l.href} onClick={() => setOpen(false)}>
+                    {l.label}
                   </a>
-                </li>
-              </ul>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+                </motion.li>
+              ))}
+            </ul>
+            <p className="menu-meta">
+              Messrs. GM Tan &amp; Company · Advocates &amp; Solicitors
+              <br />
+              Petaling Jaya, Selangor
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

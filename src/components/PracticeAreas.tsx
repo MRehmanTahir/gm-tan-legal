@@ -1,74 +1,153 @@
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import Reveal from './Reveal'
-import {
-  ArrowRightIcon,
-  BriefcaseIcon,
-  BuildingIcon,
-  FamilyIcon,
-  GavelIcon,
-  HomeKeyIcon,
-  ScrollIcon,
-} from './icons'
+import { ArrowRightIcon, PlusIcon } from './icons'
 
 const AREAS = [
   {
-    icon: <GavelIcon size={26} />,
-    title: 'Civil & Commercial Litigation',
-    desc: 'Firm, strategic advocacy before the Malaysian courts — from contractual disputes to complex commercial claims, pursued with rigour and composure.',
-  },
-  {
-    icon: <BuildingIcon size={26} />,
+    num: '01',
     title: 'Corporate & Commercial',
-    desc: 'Company formation, shareholder agreements, commercial contracts and regulatory compliance for SMEs and established enterprises.',
+    desc: 'The legal architecture your business depends on — structured with care, enforced with precision.',
+    services: [
+      'Shareholders & Joint Venture Agreements',
+      'M&A Support & Corporate Restructuring',
+      'Commercial Contracts & Negotiations',
+      'Debt Recovery',
+      'Company Formation & Governance',
+    ],
   },
   {
-    icon: <HomeKeyIcon size={26} />,
-    title: 'Conveyancing & Real Property',
-    desc: 'Sale and purchase, loan documentation, tenancy and strata matters — handled meticulously so your property transaction completes without surprise.',
+    num: '02',
+    title: 'Employment & Workplace',
+    desc: 'Protecting employers and employees alike — with preventive counsel that keeps disputes from reaching the tribunal.',
+    services: [
+      'Employment Contracts & Policies',
+      'Disciplinary Processes & IR Matters',
+      'Executive Advisory',
+      'Workplace Investigations',
+      'Retrenchment & Restructuring',
+    ],
   },
   {
-    icon: <FamilyIcon size={26} />,
-    title: 'Family & Matrimonial',
-    desc: 'Divorce, custody, maintenance and adoption, guided with the sensitivity these deeply personal matters deserve.',
+    num: '03',
+    title: 'Family Wealth & Succession',
+    desc: 'For first-generation entrepreneurs entering legacy mode — and families protecting what took a lifetime to build.',
+    services: [
+      'Trust Structures & Holding Structures',
+      'Succession Planning & Family Constitutions',
+      'Asset Protection Strategies',
+      'Family Business Governance',
+      'Wills & Estate Planning',
+    ],
   },
   {
-    icon: <ScrollIcon size={26} />,
-    title: 'Wills, Probate & Estate',
-    desc: 'Wills, letters of administration, grants of probate and estate planning — securing your legacy and easing the burden on those you love.',
+    num: '04',
+    title: 'ESG & Governance',
+    desc: 'Embedding responsible governance at every level — for businesses that are built to last and lead.',
+    services: [
+      'ESG Policy & Compliance Frameworks',
+      'Board Governance Advisory',
+      'Director Duties & Liabilities',
+      'Sustainability Reporting Guidance',
+      'Regulatory Compliance',
+    ],
   },
   {
-    icon: <BriefcaseIcon size={26} />,
-    title: 'Employment & Industrial Relations',
-    desc: 'Advisory and representation for employers and employees alike — dismissals, disputes, workplace policies and Industrial Court proceedings.',
+    num: '05',
+    title: 'Mediation & Dispute Resolution',
+    desc: 'Preserving relationships and resolving conflict — with expertise that keeps disputes out of the courtroom wherever possible.',
+    services: [
+      'Commercial Mediation',
+      'Family & Partnership Disputes',
+      'Shareholder Conflict Resolution',
+      'Workplace Mediation',
+      'Negotiated Settlements',
+    ],
+  },
+  {
+    num: '06',
+    title: 'Trademarks & IP',
+    desc: 'Your brand and intellectual assets are among your most valuable properties. We protect them rigorously.',
+    services: [
+      'Trademark Registration & Renewals',
+      'IP Strategy & Portfolio Management',
+      'Brand Protection',
+      'IP Licensing Agreements',
+      'Infringement Advisory',
+    ],
   },
 ]
 
 export default function PracticeAreas() {
+  const [openIdx, setOpenIdx] = useState<number | null>(0)
+
   return (
-    <section className="practice section-pad" id="practice">
+    <section className="practice section" id="practice">
       <div className="container">
         <div className="practice-head">
           <Reveal>
-            <span className="kicker">Bidang Guaman · Our Services</span>
-            <h2 className="section-title">Practice Areas</h2>
-            <p className="section-lede">
-              A full-service practice built on decades of Malaysian legal experience — whatever the
-              matter, you will find seasoned counsel here.
-            </p>
+            <span className="kicker">Practice Areas</span>
+            <h2 className="display">
+              Precision counsel across
+              <br />
+              every <span className="accent">critical domain.</span>
+            </h2>
           </Reveal>
         </div>
-        <div className="practice-grid">
-          {AREAS.map((a, i) => (
-            <Reveal key={a.title} delay={i * 0.08}>
-              <article className="practice-card">
-                <div className="practice-icon">{a.icon}</div>
-                <h3>{a.title}</h3>
-                <p>{a.desc}</p>
-                <a className="practice-card-link" href="#contact">
-                  Enquire <ArrowRightIcon />
-                </a>
-              </article>
-            </Reveal>
-          ))}
+
+        <div>
+          {AREAS.map((area, i) => {
+            const open = openIdx === i
+            return (
+              <Reveal key={area.num} delay={i * 0.05} className={`prow${open ? ' open' : ''}`}>
+                <button
+                  className="prow-head"
+                  onClick={() => setOpenIdx(open ? null : i)}
+                  aria-expanded={open}
+                  aria-controls={`prow-body-${i}`}
+                >
+                  <span className="prow-num">{area.num}</span>
+                  <span className="prow-title">{area.title}</span>
+                  <span className="prow-toggle" aria-hidden="true">
+                    <PlusIcon size={18} />
+                  </span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {open && (
+                    <motion.div
+                      className="prow-body"
+                      id={`prow-body-${i}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.55, ease: [0.22, 0.61, 0.36, 1] }}
+                    >
+                      <div className="prow-body-inner">
+                        <div className="prow-desc">
+                          <p>{area.desc}</p>
+                          <a href="#engage" className="tlink">
+                            Enquire Now <ArrowRightIcon size={13} />
+                          </a>
+                        </div>
+                        <ul className="prow-services">
+                          {area.services.map((s, si) => (
+                            <motion.li
+                              key={s}
+                              initial={{ opacity: 0, x: 18 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.12 + si * 0.06, duration: 0.45, ease: 'easeOut' }}
+                            >
+                              {s}
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </Reveal>
+            )
+          })}
         </div>
       </div>
     </section>

@@ -1,65 +1,79 @@
-import Logo from './Logo'
-import { MailIcon, PhoneIcon, PinIcon } from './icons'
+import { LogoMark } from './Logo'
 
-const LINKS = [
-  { href: '#home', label: 'Home' },
+const FIRM_LINKS = [
+  { href: '#philosophy', label: 'Our Philosophy' },
   { href: '#practice', label: 'Practice Areas' },
-  { href: '#advocate', label: 'The Advocate' },
-  { href: '#why', label: 'Why Us' },
-  { href: '#testimonials', label: 'Testimonials' },
-  { href: '#contact', label: 'Book a Consultation' },
+  { href: '#divisions', label: 'Divisions' },
+  { href: '#people', label: 'Our People' },
+  { href: '#approach', label: 'Our Approach' },
 ]
 
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-grid">
-          <div className="footer-about">
-            <Logo />
-            <p>
-              GM Tan &amp; Company is an established Malaysian firm of Advocates &amp; Solicitors,
-              serving families and businesses with experience, discretion and heart.
+        <div className="footer-top">
+          <div>
+            <a href="#top" className="nav-logo" aria-label="GM Tan & Company — Home">
+              <LogoMark size={52} />
+              <span>
+                <span className="nav-logo-name">GM TAN &amp; COMPANY</span>
+                <span className="nav-logo-tag">HeartBased Lawyers</span>
+              </span>
+            </a>
+            <p className="footer-statement">
+              Protecting Businesses, Founders and Families — through Growth, Governance and
+              Generational Wealth.
             </p>
           </div>
-          <div>
-            <h4>Quick Links</h4>
-            <ul className="footer-links">
-              {LINKS.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href}>{l.label}</a>
+
+          <div className="footer-cols">
+            <div>
+              <h4>Firm</h4>
+              <ul className="footer-links">
+                {FIRM_LINKS.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href}>{l.label}</a>
+                  </li>
+                ))}
+                <li>
+                  <a href="#engage">Contact Us</a>
                 </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4>Contact</h4>
-            <div className="footer-contact">
-              <div>
-                <PinIcon size={16} />
+              </ul>
+            </div>
+            <div>
+              <h4>Contact</h4>
+              <div className="footer-contact">
                 <span>
-                  Suite 18-03, Menara Centara, 360 Jalan Tuanku Abdul Rahman, 50100 Kuala Lumpur
+                  C-10-28, Block C, Lobby 2, Centum Oasis Corporate Park, No. 2, Jalan PJU 1A/2,
+                  Ara Damansara, 47301 Petaling Jaya, Selangor
                 </span>
-              </div>
-              <div>
-                <PhoneIcon size={16} />
-                <a href="tel:+60321418800">+60 3-2141 8800</a>
-              </div>
-              <div>
-                <MailIcon size={16} />
-                <a href="mailto:enquiries@gmtan.com.my">enquiries@gmtan.com.my</a>
+                <a href="tel:+60327145456">03-2714 5456</a>
+                <a href="tel:+60162727144">016-272 7144</a>
+                <a href="mailto:azlenamaria@gmtan.biz">azlenamaria@gmtan.biz</a>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div className="footer-bottom">
         <div className="container">
           <span>
-            © {new Date().getFullYear()} GM Tan &amp; Company. All rights reserved. This website is
-            for general information only and does not constitute legal advice.
+            © {new Date().getFullYear()} Messrs. GM Tan &amp; Company · Advocates &amp; Solicitors
+            · Registered Trademark Agents · All Rights Reserved
           </span>
-          <span className="footer-bm">Peguambela &amp; Peguamcara · Heart Based Lawyers</span>
+          <ul className="footer-legal">
+            <li>
+              <a href="#top">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#top">Terms of Engagement</a>
+            </li>
+            <li>
+              <a href="#top">Disclaimer</a>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>
