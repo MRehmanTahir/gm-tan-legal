@@ -1,12 +1,11 @@
 import Reveal from './Reveal'
-import { MaskedLine, ParallaxPhoto } from './fx'
+import { MaskedLine } from './fx'
 
 const PEOPLE = [
   {
     name: 'Gene Tan',
     role: 'Founding Partner',
-    photo:
-      'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=760&q=75',
+    photo: '/team/gene-tan.png',
     creds: [
       'LLB (Hons) · Advocate & Solicitor',
       'Corporate & Commercial Law',
@@ -17,8 +16,7 @@ const PEOPLE = [
   {
     name: 'Tracy May',
     role: 'Executive Director & Mediator',
-    photo:
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=760&q=75',
+    photo: '/team/tracy-may.png',
     creds: [
       'Advocate & Solicitor · Accredited Mediator',
       'Commercial & Family Mediation',
@@ -29,8 +27,7 @@ const PEOPLE = [
   {
     name: 'Azlena Maria',
     role: 'Partner',
-    photo:
-      'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=760&q=75',
+    photo: '/team/azlena-maria.png',
     creds: [
       'LLB (Hons) IIUM · Advocate & Solicitor',
       'Employment & Industrial Relations',
@@ -67,8 +64,9 @@ export default function People() {
         <div className="people-grid">
           {PEOPLE.map((p, i) => (
             <Reveal key={p.name} delay={i * 0.14} className="person">
-              {/* Placeholder portraits — replace with the firm's photography */}
-              <ParallaxPhoto src={p.photo} alt={`${p.name}, ${p.role}`} />
+              <div className="person-photo">
+                <img src={p.photo} alt={`${p.name}, ${p.role}`} loading="lazy" />
+              </div>
               <h3 className="person-name">{p.name}</h3>
               <div className="person-role">{p.role}</div>
               <ul className="person-creds">
