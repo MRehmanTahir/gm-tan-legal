@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { FormEvent } from 'react'
+import type { ChangeEvent, FormEvent } from 'react'
 import Reveal from './Reveal'
 import { ArrowRightIcon } from './icons'
 import { HairlineDraw, MaskedLine } from './fx'
@@ -24,9 +24,21 @@ const ENQUIRY_AREAS = [
 ]
 
 type Status = 'idle' | 'sending' | 'ok' | 'err'
+const MAX_ENQUIRY_WORDS = 50
 
 export default function Contact() {
   const [status, setStatus] = useState<Status>('idle')
+  const [messageWords, setMessageWords] = useState(0)
+
+  function onMessageChange(e: ChangeEvent<HTMLTextAreaElement>) {
+    const words = e.currentTarget.value.trim().split(/\s+/).filter(Boolean)
+    if (words.length > MAX_ENQUIRY_WORDS) {
+      e.currentTarget.value = words.slice(0, MAX_ENQUIRY_WORDS).join(' ')
+      setMessageWords(MAX_ENQUIRY_WORDS)
+      return
+    }
+    setMessageWords(words.length)
+  }
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -44,6 +56,7 @@ export default function Contact() {
       })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       form.reset()
+      setMessageWords(0)
       setStatus('ok')
     } catch {
       setStatus('err')
@@ -127,44 +140,70 @@ export default function Contact() {
               <div className="eform-row">
                 <div className="efield">
                   <label htmlFor="ef-first">First Name</label>
-                  <input id="ef-first" name="first_name" type="text" required />
+                  <input id="ef-first" name="first_name" type="text" minLength={2} maxLength={50} required />
                   <span className="efield-bar" />
                 </div>
                 <div className="efield">
                   <label htmlFor="ef-last">Last Name</label>
-                  <input id="ef-last" name="last_name" type="text" required />
+                  <input id="ef-last" name="last_name" type="text" minLength={2} maxLength={50} required />
                   <span className="efield-bar" />
                 </div>
               </div>
               <div className="efield">
                 <label htmlFor="ef-company">Company / Organisation</label>
-                <input id="ef-company" name="company" type="text" />
+                <input id="ef-company" name="company" type="text" maxLength={100} />
                 <span className="efield-bar" />
               </div>
               <div className="eform-row">
                 <div className="efield">
                   <label htmlFor="ef-email">Email Address</label>
-                  <input id="ef-email" name="email" type="email" required />
+                  <input id="ef-email" name="email" type="email" maxLength={120} required />
                   <span className="efield-bar" />
                 </div>
                 <div className="efield">
-                  <label htmlFor="ef-area">Area of Enquiry</label>
-                  <select id="ef-area" name="area" required defaultValue="">
-                    <option value="" disabled>
-                      Select a practice area
-                    </option>
-                    {ENQUIRY_AREAS.map((a) => (
-                      <option key={a} value={a}>
-                        {a}
-                      </option>
-                    ))}
-                  </select>
+                  <label htmlFor="ef-phone">Contact Number</label>
+                  <input
+                    id="ef-phone"
+                    name="phone"
+                    type="tel"
+                    pattern="[0-9+() -]{7,20}"
+                    title="Enter a valid contact number using 7 to 20 digits and common phone symbols."
+                    required
+                  />
                   <span className="efield-bar" />
                 </div>
               </div>
               <div className="efield">
-                <label htmlFor="ef-message">Brief Description</label>
-                <textarea id="ef-message" name="message" required />
+                <label htmlFor="ef-area">Area of Enquiry</label>
+                <select id="ef-area" name="area" required defaultValue="">
+                  <option value="" disabled>
+                    Select a practice area
+                  </option>
+                  {ENQUIRY_AREAS.map((a) => (
+                    <option key={a} value={a}>
+                      {a}
+                    </option>
+                  ))}
+                </select>
+                <span className="efield-bar" />
+              </div>
+              <div className="efield">
+                <label htmlFor="ef-message">Brief Enquiry</label>
+                <textarea
+                  id="ef-message"
+                  name="message"
+                  minLength={10}
+                  required
+                  onChange={onMessageChange}
+                  aria-describedby="ef-message-limit"
+                />
+                <span
+                  className="efield-limit"
+                  id="ef-message-limit"
+                  aria-live="polite"
+                >
+                  {messageWords}/{MAX_ENQUIRY_WORDS} words
+                </span>
                 <span className="efield-bar" />
               </div>
 
@@ -176,8 +215,11 @@ export default function Contact() {
               </button>
 
               <p className="eform-note">
-                Enquiries are treated in confidence. Submitting this form does not create a
-                solicitor–client relationship.
+                Information submitted through this form will be treated in confidence. Submitting
+                an enquiry does not create a solicitor–client relationship. Any engagement by the
+                firm will be confirmed separately in writing. By submitting this form, you consent
+                to the processing of your personal data in accordance with applicable data
+                protection requirements.
               </p>
 
               {status === 'ok' && (

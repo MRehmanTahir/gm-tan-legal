@@ -70,13 +70,10 @@ export default function Footer() {
           </span>
           <ul className="footer-legal">
             <li>
-              <a href="/privacy-policy/">Privacy Policy</a>
+              <a href="#top">Terms &amp; Conditions</a>
             </li>
             <li>
-              <a href="/terms-of-engagement/">Terms of Engagement</a>
-            </li>
-            <li>
-              <a href="/disclaimer/">Disclaimer</a>
+              <a href="#top">PDP Notice</a>
             </li>
           </ul>
         </div>
