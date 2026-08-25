@@ -7,10 +7,15 @@ function Counter({ to, suffix = '' }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const reduce = useReducedMotion()
-  const [value, setValue] = useState(reduce ? to : 0)
+  const [value, setValue] = useState(to)
 
   useEffect(() => {
-    if (!inView || reduce) return
+    if (reduce) {
+      setValue(to)
+      return
+    }
+    if (!inView) return
+    setValue(0)
     const controls = animate(0, to, {
       duration: 2,
       ease: [0.16, 1, 0.3, 1],
