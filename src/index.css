@@ -891,6 +891,10 @@ h1, h2, h3 {
   margin-bottom: 72px;
 }
 
+.divisions-head .line-mask + .line-mask {
+  margin-top: 0.08em;
+}
+
 .div-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -898,6 +902,9 @@ h1, h2, h3 {
 
 .div-cell {
   position: relative;
+  display: grid;
+  grid-template-rows: auto auto auto auto auto;
+  align-content: start;
   padding: 8px 34px 20px 0;
   border-left: 1px solid rgba(196, 160, 82, 0.22);
   padding-left: 34px;
@@ -944,22 +951,29 @@ h1, h2, h3 {
   font-size: 14px;
   font-weight: 300;
   color: rgba(246, 241, 232, 0.62);
+  min-height: 148px;
   margin-bottom: 24px;
 }
 
 .div-tags {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 0;
+  display: grid;
+  gap: 9px;
   font-size: 12px;
   letter-spacing: 0.08em;
   color: rgba(233, 206, 138, 0.75);
 }
 
-.div-tags li:not(:last-child)::after {
+.div-tags li {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 7px;
+  line-height: 1.55;
+}
+
+.div-tags li::before {
   content: '·';
-  margin: 0 10px;
   color: rgba(196, 160, 82, 0.5);
 }
 
@@ -1519,6 +1533,10 @@ h1, h2, h3 {
   .div-cell {
     border-left: 0;
     padding-left: 0;
+  }
+
+  .div-desc {
+    min-height: 0;
   }
 
   .steps {
