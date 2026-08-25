@@ -63,8 +63,8 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.9, ease: EASE }}
             >
-              Counsel to Malaysian companies, and to the families behind them, for more than
-              twenty years.
+              Trusted counsel to Malaysian businesses, founders and the families behind them,
+              for more than twenty years.
             </motion.p>
             <motion.div
               className="hero-ctas"
@@ -94,7 +94,7 @@ export default function Hero() {
           >
             <p className="hero-firm">Messrs. GM Tan &amp; Company</p>
             <div>
-              <div className="hero-years-num gold-gradient">20+</div>
+              <div className="hero-years-num gold-gradient">14</div>
               <div className="hero-years-label">
                 Years in
                 <br />
