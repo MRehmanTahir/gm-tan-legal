@@ -38,12 +38,16 @@ Our People (3 partners) · Approach (I–IV) · Testimonial · Engage Us
 
 ## Content to finalise before launch
 
+- **Production URL**: copy `.env.example` to `.env.production` and replace
+  `https://gm-tan-legal.com` with the final HTTPS domain if it changes. The build uses this value
+  for canonical/social URLs and generates `robots.txt` and `sitemap.xml`.
+
 - **Lead form**: submissions POST to [FormSubmit](https://formsubmit.co) —
   change `LEAD_ENDPOINT` in `src/components/Contact.tsx` to the firm's inbox
   (e.g. `azlenamaria@gmtan.biz`). The first submission triggers a one-time
   activation email to that address.
 - **Photography**: partner portraits are Unsplash placeholders — replace with
   the firm's own photos.
-- **Social/OG**: `public/og.png` uses a system serif; regenerate with brand
-  fonts if desired, and set absolute `og:image`/canonical URLs in
-  `index.html` once the production domain is confirmed.
+- **Social/OG artwork**: `public/og.png` uses a system serif; regenerate with
+  the final brand fonts if desired. Absolute social and canonical URLs are
+  populated automatically from `VITE_SITE_URL`.

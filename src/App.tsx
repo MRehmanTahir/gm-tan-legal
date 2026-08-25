@@ -8,6 +8,7 @@ import Divisions from './components/Divisions'
 import People from './components/People'
 import Approach from './components/Approach'
 import Testimonial from './components/Testimonial'
+import Faq from './components/Faq'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
@@ -56,6 +57,7 @@ export default function App() {
         <People />
         <Approach />
         <Testimonial />
+        <Faq />
         <Contact />
       </main>
       <Footer />

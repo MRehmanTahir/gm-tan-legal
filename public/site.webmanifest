@@ -1,0 +1,17 @@
+{
+  "name": "GM Tan & Company — HeartBased Lawyers",
+  "short_name": "GM Tan & Company",
+  "description": "Advocates and Solicitors in Petaling Jaya, Malaysia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4d0c17",
+  "theme_color": "#6b1220",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

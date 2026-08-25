@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { LogoMark } from './Logo'
 import { CloseIcon, MenuIcon } from './icons'
 
 const LINKS = [
@@ -48,7 +47,13 @@ export default function Nav() {
       >
         <nav className={`navpill${scrolled ? ' scrolled' : ''}`} aria-label="Main navigation">
           <a href="#top" className="nav-logo" aria-label="GM Tan & Company — Home">
-            <LogoMark size={38} />
+            <img
+              className="brand-emblem nav-emblem"
+              src="/favicon.png"
+              alt=""
+              width="512"
+              height="512"
+            />
             <span>
               <span className="nav-logo-name">GM TAN &amp; COMPANY</span>
               <span className="nav-logo-tag">HeartBased Lawyers</span>

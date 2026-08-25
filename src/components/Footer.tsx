@@ -1,11 +1,10 @@
-import { LogoMark } from './Logo'
-
 const FIRM_LINKS = [
   { href: '#philosophy', label: 'Our Philosophy' },
   { href: '#practice', label: 'Practice Areas' },
   { href: '#divisions', label: 'Divisions' },
   { href: '#people', label: 'Our People' },
   { href: '#approach', label: 'Our Approach' },
+  { href: '#faq', label: 'FAQs' },
 ]
 
 export default function Footer() {
@@ -15,7 +14,7 @@ export default function Footer() {
         <div className="footer-top">
           <div>
             <a href="#top" className="nav-logo" aria-label="GM Tan & Company — Home">
-              <LogoMark size={52} />
+              <img className="brand-emblem footer-emblem" src="/favicon.png" alt="" width="512" height="512" />
               <span>
                 <span className="nav-logo-name">GM TAN &amp; COMPANY</span>
                 <span className="nav-logo-tag">HeartBased Lawyers</span>
@@ -38,6 +37,11 @@ export default function Footer() {
                 ))}
                 <li>
                   <a href="#engage">Contact Us</a>
+                </li>
+                <li>
+                  <a href="https://www.malaysianbar.org.my/" target="_blank" rel="noreferrer">
+                    Malaysian Bar
+                  </a>
                 </li>
               </ul>
             </div>
@@ -65,13 +69,13 @@ export default function Footer() {
           </span>
           <ul className="footer-legal">
             <li>
-              <a href="#top">Privacy Policy</a>
+              <a href="/privacy-policy/">Privacy Policy</a>
             </li>
             <li>
-              <a href="#top">Terms of Engagement</a>
+              <a href="/terms-of-engagement/">Terms of Engagement</a>
             </li>
             <li>
-              <a href="#top">Disclaimer</a>
+              <a href="/disclaimer/">Disclaimer</a>
             </li>
           </ul>
         </div>
