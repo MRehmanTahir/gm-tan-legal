@@ -1070,7 +1070,7 @@ h1, h2, h3 {
   object-fit: contain;
   object-position: center bottom;
   padding-top: 9%;
-  filter: saturate(0.98) drop-shadow(0 20px 28px rgba(77, 52, 24, 0.22));
+  filter: saturate(0.98) drop-shadow(0 14px 20px rgba(77, 52, 24, 0.11));
   transform-origin: bottom center;
   transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
 }

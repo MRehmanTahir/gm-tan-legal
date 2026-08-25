@@ -55,8 +55,9 @@ export default function People() {
           </div>
           <Reveal delay={0.2}>
             <p className="lede">
-              Our partners do not send a letter of advice and step back. They stand in the room
-              with you.
+              Across every role, our team stays closely engaged — from the first conversation to
+              the final resolution — bringing clarity, care and sound judgment to every client
+              relationship.
             </p>
           </Reveal>
         </div>
