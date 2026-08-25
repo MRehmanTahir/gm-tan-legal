@@ -64,7 +64,7 @@ export default function Hero() {
               transition={{ duration: 0.9, delay: 0.9, ease: EASE }}
             >
               Trusted counsel to Malaysian businesses, founders and the families behind them,
-              for more than twenty years.
+              for fourteen years.
             </motion.p>
             <motion.div
               className="hero-ctas"
