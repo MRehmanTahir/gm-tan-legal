@@ -5,22 +5,22 @@ const STEPS = [
   {
     num: 'I',
     title: 'Strategic Discovery',
-    desc: 'We learn the business, the risks and the people before touching a document.',
+    desc: 'We understand your objectives, context, risks and the people involved before shaping our advice.',
   },
   {
     num: 'II',
-    title: 'Risk Architecture',
-    desc: 'We map your exposure and design the structure that protects your position.',
+    title: 'Legal & Risk Architecture',
+    desc: 'We map your exposure and build the legal framework that protects your position.',
   },
   {
     num: 'III',
     title: 'Precise Execution',
-    desc: 'Clear agreements, delivered fast. You always know where you stand.',
+    desc: 'Our advice, agreements and documents are carefully prepared and disciplined in execution.',
   },
   {
     num: 'IV',
     title: 'Ongoing Counsel',
-    desc: 'Your business will change. We stay on, through every stage and generation.',
+    desc: 'Businesses and families evolve. We remain steady counsel through change, transition and generations.',
   },
 ]
 
@@ -34,16 +34,16 @@ export default function Approach() {
               <span className="kicker">Our Approach</span>
             </Reveal>
             <h2 className="display">
-              <MaskedLine delay={0.1}>A disciplined method,</MaskedLine>
+              <MaskedLine delay={0.1}>A disciplined approach to</MaskedLine>
               <MaskedLine delay={0.22}>
-                <span className="accent">every</span> time.
+                <span className="accent">every</span> matter.
               </MaskedLine>
             </h2>
           </div>
           <Reveal delay={0.2}>
             <p className="lede">
-              We listen before we draft. The structure follows the decision, not the other way
-              around.
+              We listen before we advise. Our legal strategy follows your objectives, not the
+              other way around.
             </p>
           </Reveal>
         </div>
