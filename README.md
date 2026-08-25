@@ -44,7 +44,7 @@ Our People (3 partners) · Approach (I–IV) · Testimonial · Engage Us
 
 - **Lead form**: submissions POST to [FormSubmit](https://formsubmit.co) —
   change `LEAD_ENDPOINT` in `src/components/Contact.tsx` to the firm's inbox
-  (e.g. `azlenamaria@gmtan.biz`). The first submission triggers a one-time
+  (`gmtangeneral@gmail.com`). The first submission triggers a one-time
   activation email to that address.
 - **Photography**: partner portraits are Unsplash placeholders — replace with
   the firm's own photos.

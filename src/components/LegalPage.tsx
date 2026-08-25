@@ -76,7 +76,7 @@ const PAGE_CONTENT = {
       {
         heading: '9. Contact and updates',
         paragraphs: [
-          'For privacy questions or requests, email azlenamaria@gmtan.biz, call 03-2714 5456, or write to C-10-28, Block C, Lobby 2, Centum Oasis Corporate Park, No. 2, Jalan PJU 1A/2, Ara Damansara, 47301 Petaling Jaya, Selangor.',
+          'For privacy questions or requests, email gmtangeneral@gmail.com, call 03-2714 5456, or write to C-10-28, Block C, Lobby 2, Centum Oasis Corporate Park, No. 2, Jalan PJU 1A/2, Ara Damansara, 47301 Petaling Jaya, Selangor.',
           'We may update this notice to reflect changes in our practices or applicable requirements. The current version will be published on this page with its effective date.',
         ],
       },
@@ -169,7 +169,7 @@ const PAGE_CONTENT = {
         heading: '12. Governing terms and questions',
         paragraphs: [
           'The signed or otherwise accepted engagement letter, together with any matter-specific terms, will govern the engagement. If these website terms conflict with that engagement letter, the engagement letter prevails. These general terms are governed by the laws of Malaysia.',
-          'Questions concerning an engagement or invoice should first be raised with the lawyer responsible for the matter or sent to azlenamaria@gmtan.biz. No website publication replaces rights or obligations imposed by applicable law or professional rules.',
+          'Questions concerning an engagement or invoice should first be raised with the lawyer responsible for the matter or sent to gmtangeneral@gmail.com. No website publication replaces rights or obligations imposed by applicable law or professional rules.',
         ],
       },
       {

@@ -53,8 +53,9 @@ export default function Footer() {
                   Ara Damansara, 47301 Petaling Jaya, Selangor
                 </span>
                 <a href="tel:+60327145456">03-2714 5456</a>
-                <a href="tel:+60162727144">016-272 7144</a>
-                <a href="mailto:azlenamaria@gmtan.biz">azlenamaria@gmtan.biz</a>
+                <a href="tel:+601131364259">011-3136 4259</a>
+                <a href="mailto:gmtangeneral@gmail.com">gmtangeneral@gmail.com</a>
+                <span>Monday–Friday · 9:00am–5:30pm</span>
               </div>
             </div>
           </div>

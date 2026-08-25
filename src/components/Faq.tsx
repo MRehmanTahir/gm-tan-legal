@@ -20,7 +20,7 @@ const FAQS = [
   {
     question: 'How can I contact GM Tan & Company?',
     answer:
-      'Call 03-2714 5456 or 016-272 7144, email azlenamaria@gmtan.biz, or submit the confidential enquiry form on this website.',
+      'Call 03-2714 5456 or 011-3136 4259, email gmtangeneral@gmail.com, or submit the confidential enquiry form on this website.',
   },
 ]
 

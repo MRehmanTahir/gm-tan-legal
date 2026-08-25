@@ -7,9 +7,9 @@ import { HairlineDraw, MaskedLine } from './fx'
 /**
  * Lead destination. FormSubmit relays submissions to this inbox with no backend;
  * the first submission triggers a one-time activation email to the address below.
- * Swap for the firm's production inbox (e.g. azlenamaria@gmtan.biz) before launch.
+ * The first submission triggers a one-time activation email to the firm inbox.
  */
-const LEAD_ENDPOINT = 'https://formsubmit.co/ajax/accounts@k5.com.au'
+const LEAD_ENDPOINT = 'https://formsubmit.co/ajax/gmtangeneral@gmail.com'
 
 const ENQUIRY_AREAS = [
   'Corporate & Commercial',
@@ -66,8 +66,8 @@ export default function Contact() {
             </h2>
             <Reveal delay={0.25}>
               <p className="lede" style={{ marginTop: 28 }}>
-                The most expensive advice is the advice you never sought. A first conversation is
-                confidential and costs nothing.
+                The most expensive advice is the advice you never sought. Start with a
+                confidential conversation about what comes next.
               </p>
             </Reveal>
 
@@ -76,14 +76,35 @@ export default function Contact() {
                 <HairlineDraw />
                 <div className="contact-item">
                   <strong>Address</strong>
-                  <span>
-                    C-10-28, Block C, Lobby 2<br />
-                    Centum Oasis Corporate Park
-                    <br />
-                    No. 2, Jalan PJU 1A/2, Ara Damansara
-                    <br />
-                    47301 Petaling Jaya, Selangor
-                  </span>
+                  <div>
+                    <span>
+                      C-10-28, Block C, Lobby 2<br />
+                      Centum Oasis Corporate Park
+                      <br />
+                      No. 2, Jalan PJU 1A/2, Ara Damansara
+                      <br />
+                      47301 Petaling Jaya, Selangor
+                    </span>
+                    <div className="contact-map">
+                      <iframe
+                        title="GM Tan & Company location on Google Maps"
+                        src="https://www.google.com/maps?q=3.1136564%2C101.5770298&z=16&output=embed"
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                      />
+                      <a
+                        href="https://www.google.com/maps/dir//GM+Tan+%26+Company,+C-10-28,+Block+C,+Lobby+2,+Centum+Oasis+Corporate+Park,+No.+2,+Jalan+PJU+1a%2F2,+Ara+Damansara,+47301+Petaling+Jaya,+Selangor,+Malaysia/@28.4302529,70.3479725,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x31cc4e8400dc8e13:0xcf9aac0ea9f5dd8b!2m2!1d101.5770298!2d3.1136564?entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Open in Google Maps
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="contact-item">
+                  <strong>Office Hours</strong>
+                  <span>Monday–Friday · 9:00am–5:30pm</span>
                 </div>
                 <div className="contact-item">
                   <strong>Telephone</strong>
@@ -91,11 +112,11 @@ export default function Contact() {
                 </div>
                 <div className="contact-item">
                   <strong>Mobile</strong>
-                  <a href="tel:+60162727144">016-272 7144</a>
+                  <a href="tel:+601131364259">011-3136 4259</a>
                 </div>
                 <div className="contact-item">
                   <strong>Email</strong>
-                  <a href="mailto:azlenamaria@gmtan.biz">azlenamaria@gmtan.biz</a>
+                  <a href="mailto:gmtangeneral@gmail.com">gmtangeneral@gmail.com</a>
                 </div>
               </div>
             </Reveal>
@@ -168,7 +189,7 @@ export default function Contact() {
               {status === 'err' && (
                 <p className="eform-status err" role="alert">
                   We could not send your enquiry just now. Kindly telephone us at 03-2714 5456 or
-                  email azlenamaria@gmtan.biz.
+                  email gmtangeneral@gmail.com.
                 </p>
               )}
             </form>
